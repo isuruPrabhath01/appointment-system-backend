@@ -6,6 +6,7 @@ use App\Models\Doctor_shift;
 use App\Services\DoctorShiftService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rules\Exists;
 
 class DoctorShiftController extends Controller
 {
@@ -97,8 +98,21 @@ class DoctorShiftController extends Controller
      */
     public function destroy(string $id)
     {
-        $doctorShift=Doctor_shift::find($id);
-        $doctorShift->delete();
-        return response()->json('Recode deleted..!!',200);
+        if(Doctor_shift::find($id)->exists()){
+            $doctorShift=Doctor_shift::find($id);
+            $doctorShift->delete();
+            return response()->json('Recode deleted..!!',200);
+        }else{
+            return response()->json('Invalid Shift Id..!!',409);
+        }
+    }
+
+    public function getDoctorShiftId($doc_id,$date){
+        $response=$this->doctorShiftService->findShiftId($doc_id,$date);
+        if($response===0){
+            return response()->json('canot find Shift',409);
+        }else{
+            return response()->json($response,200);
+        }
     }
 }

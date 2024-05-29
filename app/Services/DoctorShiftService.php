@@ -31,9 +31,13 @@ class DoctorShiftService{
         if(!Doctor_shift::where('doc_id',$request->doc_id)->where('date',$request->date)->exists()){
             return 0;
         }else{
-            $doctorShift = $this->convertor->doctor_shift_find_convert_to_model($request,Doctor_shift::find($this->utils->findDoctorShiftIdUsingDoc_idAndDate($request)));
+            $doctorShift = $this->convertor->doctor_shift_find_convert_to_model($request,Doctor_shift::find($this->utils->findDoctorShiftIdUsingDoc_idAndDate($request->doc_id,$request->date)));
             $doctorShift->save();
             return $doctorShift;
         }
+    }
+
+    public function findShiftId($doc_id,$date){
+        return $this->utils->findDoctorShiftIdUsingDoc_idAndDate($doc_id,$date);
     }
 }
