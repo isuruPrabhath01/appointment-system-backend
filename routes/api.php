@@ -26,6 +26,7 @@ Route::group(['middleware'=>['auth:sanctum']], function () {
     Route::post('v1/doctor', [DoctorController::class, 'store']);
     Route::post('v1/doctor/{id}', [DoctorController::class, 'update']);
     Route::get('v1/doctor', [DoctorController::class, 'index']);
+    Route::get('v1/doctor/{id}', [DoctorController::class, 'show']);
     Route::delete('v1/doctor/{id}', [DoctorController::class, 'destroy']);
 });
 
