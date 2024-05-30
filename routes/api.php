@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\DoctorShiftController;
+use App\Http\Controllers\PatientController;
 use App\Models\Doctor_shift;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -38,5 +39,12 @@ Route::group(['middleware'=>['auth:sanctum']], function () {
     Route::get('v1/doctorShift', [DoctorShiftController::class, 'index']);
     Route::get('v1/doctorShift/{id}', [DoctorShiftController::class, 'show']);
     Route::get('v1/doctorShift/getShiftId/{doc_id}/{date}', [DoctorShiftController::class, 'getDoctorShiftId']);
+
+    //Patient
+    Route::post('v1/patient', [PatientController::class, 'store']);
+    Route::post('v1/patient/update', [PatientController::class, 'update']);
+    Route::get('v1/patient', [PatientController::class, 'index']);
+    Route::get('v1/patient/{email}', [PatientController::class, 'show']);
+    Route::delete('v1/patient/{email}', [PatientController::class, 'destroy']);
 });
 
