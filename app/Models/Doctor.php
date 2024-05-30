@@ -21,4 +21,9 @@ class Doctor extends Model
     {
         return $this->hasMany(Doctor_shift::class);
     }
+
+    public function appointment()
+    {
+        return $this->hasMany(Appointment::class);
+    }
 }
