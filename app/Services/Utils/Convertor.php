@@ -28,18 +28,16 @@ class Convertor{
     }
     public function doctor_shift_req_convert_to_model(Request $request):Doctor_shift{
         $doctorShift = new Doctor_shift();
-        $doctorShift->doc_id = $request->doc_id;
+        $doctorShift->doc_id =Doctor::find($request->doc_id)->id;
         $doctorShift->date = $request->date;
         $doctorShift->shift_array = $request->shift_array;
 
         return $doctorShift;
     }
     public function doctor_shift_find_convert_to_model(Request $request, $doctorShift){
-
-        $doctorShift->doc_id = $request->doc_id;
+        $doctorShift->doc_id = Doctor::find($request->doc_id)->id;
         $doctorShift->date = $request->date;
         $doctorShift->shift_array = $request->shift_array;
-
         return $doctorShift;
     }
 }

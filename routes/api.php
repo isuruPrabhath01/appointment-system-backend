@@ -36,6 +36,7 @@ Route::group(['middleware'=>['auth:sanctum']], function () {
     Route::post('v1/doctorShift', [DoctorShiftController::class, 'store']);
     Route::post('v1/doctorShift/update', [DoctorShiftController::class, 'update']);
     Route::get('v1/doctorShift', [DoctorShiftController::class, 'index']);
+    Route::get('v1/doctorShift/{id}', [DoctorShiftController::class, 'show']);
     Route::get('v1/doctorShift/getShiftId/{doc_id}/{date}', [DoctorShiftController::class, 'getDoctorShiftId']);
 });
 

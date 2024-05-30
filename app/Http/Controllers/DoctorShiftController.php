@@ -11,6 +11,7 @@ use Illuminate\Validation\Rules\Exists;
 class DoctorShiftController extends Controller
 {
     protected DoctorShiftService $doctorShiftService;
+    
 
     public function __construct(DoctorShiftService $doctorShiftService)
     {
@@ -21,7 +22,8 @@ class DoctorShiftController extends Controller
      */
     public function index()
     {
-        return response()->json(Doctor_shift::latest()->get(),200);
+        $response=Doctor_shift::with('doctor')->latest()->get();
+        return response()->json($response,200);
     }
 
     /**
@@ -59,7 +61,7 @@ class DoctorShiftController extends Controller
      */
     public function show(string $id)
     {
-        $doctorShift = Doctor_shift::find($id);
+        $doctorShift = Doctor_shift::with('doctor')->find($id);
         return response()->json($doctorShift,200);
     }
 

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Doctor_shift extends Model
@@ -20,8 +21,8 @@ class Doctor_shift extends Model
         'shift_array' => 'array', 
     ];
 
-    public function doctor(): HasOne
+    public function doctor(): BelongsTo
     {
-        return $this->hasOne(doctor::class);
+        return $this->belongsTo(doctor::class,'doc_id','id');
     }
 }
