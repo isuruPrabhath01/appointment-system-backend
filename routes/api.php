@@ -4,6 +4,7 @@ use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\DoctorShiftController;
+use App\Http\Controllers\EmailController;
 use App\Http\Controllers\PatientController;
 use App\Models\Appointment;
 use App\Models\Doctor_shift;
@@ -55,5 +56,8 @@ Route::group(['middleware'=>['auth:sanctum']], function () {
     Route::get('v1/appointment', [AppointmentController::class, 'index']);
     Route::get('v1/appointment/{id}', [AppointmentController::class, 'show']);
     Route::delete('v1/patient/{id}', [AppointmentController::class, 'destroy']);
+
+    //Mail
+    Route::get('v1/email', [EmailController::class, 'sendAppointmentEmail']);
 });
 
