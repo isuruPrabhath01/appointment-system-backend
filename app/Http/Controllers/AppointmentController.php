@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Appointment;
 use App\Services\AppointmentService;
-use Illuminate\Http\Request;
+
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Request;
 
 class AppointmentController extends Controller
 {
@@ -35,18 +36,25 @@ class AppointmentController extends Controller
      */
     public function store(Request $request)
     {
-        $validate=Validator::make($request()->all(),[
+        //dd($request);
+        $validate=Validator::make($request->all(),[
             'patient_id'=>'required',
             'doc_id'=>'required',
             'appo_date'=>'required',
             'appo_time'=>'required',
             'note'=>'required',
-            'status'=>'required'
+            'status'=>'required',
+            'slot'=>'required'
         ]);
         if($validate->fails()){
             return response()->json($validate->messages(),422);
         }else{
-            return response()->json($this->appointmentService->addAppointment($request));
+            $response=$this->appointmentService->addAppointment($request);
+            if($response===0){
+                return response()->json('Bad Inputs..!!',409);
+            }else{
+                return response()->json($response,201);
+            }
         }
     }
 
@@ -71,7 +79,7 @@ class AppointmentController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $validate=Validator::make($request()->all(),[
+        $validate=Validator::make($request->all(),[
             'patient_id'=>'required',
             'doc_id'=>'required',
             'appo_date'=>'required',
@@ -86,7 +94,7 @@ class AppointmentController extends Controller
         if($response==0){
             return response()->json('Invalid Id..!!',409);
         }else{
-            return response()->json($response,201);
+            return response()->json(true,201);
         }
         
         

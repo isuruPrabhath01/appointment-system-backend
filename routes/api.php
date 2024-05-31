@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AppointmentController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\DoctorShiftController;
@@ -49,10 +50,10 @@ Route::group(['middleware'=>['auth:sanctum']], function () {
     Route::delete('v1/patient/{email}', [PatientController::class, 'destroy']);
 
     //Appointment
-    Route::post('v1/appointment', [Appointment::class, 'store']);
-    Route::post('v1/appointment/{id}', [Appointment::class, 'update']);
-    Route::get('v1/appointment', [Appointment::class, 'index']);
-    Route::get('v1/appointment/{id}', [Appointment::class, 'show']);
-    Route::delete('v1/patient/{id}', [Appointment::class, 'destroy']);
+    Route::post('v1/appointment', [AppointmentController::class, 'store']);
+    Route::post('v1/appointment/{id}', [AppointmentController::class, 'update']);
+    Route::get('v1/appointment', [AppointmentController::class, 'index']);
+    Route::get('v1/appointment/{id}', [AppointmentController::class, 'show']);
+    Route::delete('v1/patient/{id}', [AppointmentController::class, 'destroy']);
 });
 

@@ -72,11 +72,11 @@ class Convertor{
     public function getApointmentModelForCreate(Request $request):Appointment{
         $appointment=new Appointment();
         $appointment->patient_id=$request->patient_id;
-        $appointment->doc_id=$request->doc_id;
-        $appointment->appo_date=$request->appo_date;
-        $appointment->appo_time=$request->appo_time;
-        $appointment->note=$request->note;
-        $appointment->status=$request->status;
+        $appointment->doc_id =$request->doc_id ;
+        $appointment->appo_date =$request->appo_date ;
+        $appointment->appo_time =$request->appo_time ;
+        $appointment->note =$request->note ;
+        $appointment->status =$request->status ;
         return $appointment;
     }
     public function getApointmentModelForUpdate(Request $request,Appointment $appointment):Appointment{

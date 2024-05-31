@@ -27,7 +27,7 @@ class DoctorShiftService{
         }
     }
 
-    public function updateShift(Request $request){
+    public function updateShift($request){
         if(!Doctor_shift::where('doc_id',$request->doc_id)->where('date',$request->date)->exists()){
             return 0;
         }else{
